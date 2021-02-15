@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class H2DatabaseTest implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(H2DatabaseTest.class);
@@ -28,9 +28,9 @@ public class H2DatabaseTest implements CommandLineRunner {
     @Qualifier("namedParameterJdbcBookRepository")  // Test NamedParameterJdbcTemplate
     private BookRepository bookRepository;
 
-    public static void main(String[] args) {
-        SpringApplication.run(H2DatabaseTest.class, args);
-    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(H2DatabaseTest.class, args);
+//    }
 
     @Override
     public void run(String... args) throws Exception {
