@@ -4,7 +4,7 @@ import com.trainig.spring.main.project.entity.Addressee;
 
 import java.util.List;
 
-public interface AddresseRepository {
+public interface AddresseeRepository {
 
     long createAddressee(Addressee addressee);
 
@@ -13,6 +13,8 @@ public interface AddresseRepository {
     int deleteAddressee(long addresseeId);
 
     boolean isAddresseeExists(String name, String email);
+
+    boolean isAddresseeExists(long addresseeId);
 
     Addressee getById(Long id);
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional
 @Repository
-public class AddresseRepositoryImpl implements AddresseRepository {
+public class AddresseRepositoryImpl implements AddresseeRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -46,6 +46,13 @@ public class AddresseRepositoryImpl implements AddresseRepository {
         String sqlRequest = "select count(addressee_id) from addressee " +
                 "where addressee_email = ? and addressee_name = ?";
         Integer count = jdbcTemplate.queryForObject(sqlRequest, Integer.class, email, name);
+        return count != 0;
+    }
+
+    @Override
+    public boolean isAddresseeExists(long addresseeId) {
+        String sqlRequest = "select count(addressee_id) from addressee where addressee_id = ?";
+        Integer count = jdbcTemplate.queryForObject(sqlRequest, Integer.class, addresseeId);
         return count != 0;
     }
 
