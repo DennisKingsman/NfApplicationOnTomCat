@@ -1,15 +1,17 @@
 package com.trainig.spring.main.project.service;
 
 import com.trainig.spring.main.project.entity.Addressee;
-import com.trainig.spring.main.project.repository.AddresseRepository;
+import com.trainig.spring.main.project.repository.AddresseeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AddresseeServiceImpl implements AddresseeService{
 
     @Autowired
-    private AddresseRepository addresseRepository;
+    private AddresseeRepository addresseRepository;
 
     @Override
     public List<Addressee> getAllAddressee() {
@@ -35,7 +37,11 @@ public class AddresseeServiceImpl implements AddresseeService{
 
     @Override
     public boolean updateAddressee(Addressee addressee) {
-        return addresseRepository.updateAddressee(addressee) != 0;
+        if (addresseRepository.isAddresseeExists(addressee.getAddresseeId())) {
+            return false;
+        } else {
+            return addresseRepository.updateAddressee(addressee) != 0;
+        }
     }
 
     @Override

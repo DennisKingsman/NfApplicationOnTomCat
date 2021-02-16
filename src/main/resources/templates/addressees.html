@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Addressee</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "a : ${addressees}">
+        <th th:utext="${a.addresseeEmail}">...</th>
+        <th th:utext="${a.addresseeName}">...</th>
+        <td> <a th:href="@{'/delete/' + ${a.addresseeId}}">delete</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

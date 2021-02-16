@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>newAddressee</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+<h1>Create a Person:</h1>
+<form th:action="@{/addressee/add}"
+      th:object="${addressee}" method="POST">
+    Name
+    <input type="text" th:field="*{addresseeName}" />
+    <br/>
+    Email:
+    <input type="email" th:field="*{addresseeEmail}" />
+    <br/>
+    <input type="submit" value="Add" />
+
+</form>
+</body>
+</html>
