@@ -1,6 +1,6 @@
-package com.trainig.spring.repository;
+package com.trainig.spring.examples.repository;
 
-import com.trainig.spring.beans.Book;
+import com.trainig.spring.examples.beans.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

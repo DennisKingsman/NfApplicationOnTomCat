@@ -1,6 +1,6 @@
-package com.trainig.spring.dao;
+package com.trainig.spring.examples.dao;
 
-import com.trainig.spring.beans.Employee;
+import com.trainig.spring.examples.beans.Employee;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package com.trainig.spring.repository;
+package com.trainig.spring.examples.repository;
 
-import com.trainig.spring.beans.Book;
+import com.trainig.spring.examples.beans.Book;
 
 import java.math.BigDecimal;
 import java.util.List;
