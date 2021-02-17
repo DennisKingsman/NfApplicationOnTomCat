@@ -1,7 +1,7 @@
-package com.trainig.spring.rest.controllers;
+package com.trainig.spring.examples.controllers;
 
-import com.trainig.spring.beans.Employee;
-import com.trainig.spring.dao.EmployeeDAO;
+import com.trainig.spring.examples.beans.Employee;
+import com.trainig.spring.examples.dao.EmployeeDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,28 +20,27 @@ import java.util.List;
 @RestController
 public class MainRESTController {
 
+    private final Logger logger = LoggerFactory.getLogger(MainRESTController.class);
     @Autowired
     private EmployeeDAO employeeDAO;
 
-    private final Logger logger = LoggerFactory.getLogger(MainRESTController.class);
-
     @GetMapping("/welcome")
     @ResponseBody
-    public String welcome(){
+    public String welcome() {
         return "Welcome to new Rest Page";
     }
 
     @GetMapping(value = "/employees",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Employee> getEmployees(){
+    public List<Employee> getEmployees() {
         return employeeDAO.getAllEmployees();
     }
 
     @GetMapping(value = "/employee/{empNo}",
-                produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Employee getEmployee(@PathVariable("empNo") String empNo){
+    public Employee getEmployee(@PathVariable("empNo") String empNo) {
         return employeeDAO.getEmployee(empNo);
     }
 
@@ -54,7 +53,7 @@ public class MainRESTController {
     }
 
     @PutMapping(value = "employee",
-                produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Employee updateEmployee(@RequestBody Employee emp) {
         logger.info("(Service Side) Editing employee: " + emp.getEmpNo());
@@ -62,7 +61,7 @@ public class MainRESTController {
     }
 
     @DeleteMapping(value = "/employee{empNo}",
-                    produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void deleteEmployee(@PathVariable("empNo") String empNo) {
         logger.info("(Service Side) Deleting employee: " + empNo);

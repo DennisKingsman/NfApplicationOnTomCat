@@ -1,6 +1,6 @@
-package com.trainig.spring.repository;
+package com.trainig.spring.examples.repository;
 
-import com.trainig.spring.beans.Book;
+import com.trainig.spring.examples.beans.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class JdbcBookRepository implements BookRepository{
+public class JdbcBookRepository implements BookRepository {
 
     static final String PRICE = "price";
     static final String ID = "id";

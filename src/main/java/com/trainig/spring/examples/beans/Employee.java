@@ -1,4 +1,4 @@
-package com.trainig.spring.beans;
+package com.trainig.spring.examples.beans;
 
 public class Employee {
 
@@ -6,7 +6,8 @@ public class Employee {
     private String empName;
     private String position;
 
-    public Employee(){}
+    public Employee() {
+    }
 
     public Employee(String empNo, String empName, String position) {
         this.empNo = empNo;

@@ -3,12 +3,10 @@ package com.trainig.spring.main.project.rest.controller;
 import com.trainig.spring.main.project.entity.Addressee;
 import com.trainig.spring.main.project.service.AddresseeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,10 +36,9 @@ public class AddresseeRestController {
 
     @PostMapping(value = "/addressee/add")
     public ModelAndView postAddAddresseePage(@ModelAttribute(ADDRESSEE)
-                                                   Addressee addressee) {
+                                                     Addressee addressee) {
         ModelAndView modelAndView;
         if (addresseeService.addAddressee(addressee)) {
-//            model.addAttribute("all", addresseeService.getAllAddressee());
             modelAndView = new ModelAndView("redirect:/addressees");
         } else {
             modelAndView = new ModelAndView("redirect:/errorPage");
@@ -52,7 +49,7 @@ public class AddresseeRestController {
 
     @GetMapping(value = "/delete/{addresseeId}")
     public ModelAndView deleteAddressee(@PathVariable(name = "addresseeId")
-                                              Long addresseeId) {
+                                                Long addresseeId) {
         ModelAndView model;
         if (addresseeService.deleteAddressee(addresseeId)) {
             model = new ModelAndView("redirect:/addressee");

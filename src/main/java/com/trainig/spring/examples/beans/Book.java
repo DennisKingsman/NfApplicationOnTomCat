@@ -1,4 +1,4 @@
-package com.trainig.spring.beans;
+package com.trainig.spring.examples.beans;
 
 import java.math.BigDecimal;
 

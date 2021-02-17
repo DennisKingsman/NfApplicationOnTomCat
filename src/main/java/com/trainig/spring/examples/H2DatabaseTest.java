@@ -1,14 +1,12 @@
-package com.trainig.spring;
+package com.trainig.spring.examples;
 
-import com.trainig.spring.beans.Book;
-import com.trainig.spring.repository.BookRepository;
+import com.trainig.spring.examples.beans.Book;
+import com.trainig.spring.examples.repository.BookRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.math.BigDecimal;
