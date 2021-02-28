@@ -7,7 +7,9 @@
 <body>
 <!-- Include _menu.html -->
 <th:block th:include="/_menu"></th:block>
-
+<br>
+<h3 th:if="${message != null}" th:utext="${message}" style="color: red;"></h3>
+<br>
 <table border="1">
     <thead>
     <tr>
@@ -18,11 +20,20 @@
     </thead>
     <tbody>
     <tr th:each = "a : ${addressees}">
-        <th th:utext="${a.addresseeEmail}">...</th>
-        <th th:utext="${a.addresseeName}">...</th>
-        <td> <a th:href="@{'/delete/' + ${a.addresseeId}}">delete</a></td>
+        <td th:utext="${a.addresseeEmail}">...</td>
+        <td th:utext="${a.addresseeName}">...</td>
+        <td>
+            <form th:action="@{'/profile/addressees/' + ${userId}}" th:object="${a}" method="post">
+                <input th:type="hidden" name="addresseeId" th:value="${a.addresseeId}" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
+<form th:action="@{/profile/addressee/add}" method="get">
+    <input th:type="hidden" name="userId" th:value="${userId}" />
+    <button type="submit">Add Addressee</button>
+</form>
 </body>
 </html>

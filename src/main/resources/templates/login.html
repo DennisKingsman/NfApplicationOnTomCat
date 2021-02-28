@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<!--<div sec:authorize=”isAuthenticated()”>-->
+<!--<script th:inline="javascript">-->
+    <!--window.location.href = 'http://localhost:8080/';-->
+<!--</script>-->
+<!--</div>-->
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+<div>
+    <!-- /login?error=true -->
+    <div th:if="${#request.getParameter('error') == 'true'}"
+         style="color:red;margin:10px 0px;">
+        Login Failed!!!<br />
+        Reason :
+        <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+              th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
+
+    </div>
+    <form th:action="@{/login}" method="post">
+        <label> User Name : <input type="text" name="userName"/> </label>
+        <label> Password: <input type="password" name="userPassword"/> </label>
+        <input type="submit" value="Sign In"/>
+    </form>
+</div>
+</body>
+</html>

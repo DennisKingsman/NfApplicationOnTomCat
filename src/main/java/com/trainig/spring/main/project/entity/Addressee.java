@@ -1,5 +1,7 @@
 package com.trainig.spring.main.project.entity;
 
+import java.util.Objects;
+
 public class Addressee {
 
     private long addresseeId;
@@ -42,6 +44,30 @@ public class Addressee {
 
     public void setAddresseeEmail(String addresseeEmail) {
         this.addresseeEmail = addresseeEmail;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Addressee addressee = (Addressee) o;
+        return addresseeId == addressee.addresseeId &&
+                Objects.equals(addresseeName, addressee.addresseeName) &&
+                Objects.equals(addresseeEmail, addressee.addresseeEmail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(addresseeId, addresseeName, addresseeEmail);
+    }
+
+    @Override
+    public String toString() {
+        return "Addressee{" +
+                "addresseeId=" + addresseeId +
+                ", addresseeName='" + addresseeName + '\'' +
+                ", addresseeEmail='" + addresseeEmail + '\'' +
+                '}';
     }
 
 }

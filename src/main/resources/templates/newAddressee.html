@@ -2,22 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>newAddressee</title>
+    <title>NewAddressee</title>
 </head>
 <body>
 <!-- Include _menu.html -->
 <th:block th:include="/_menu"></th:block>
 <h1>Create a Person:</h1>
-<form th:action="@{/addressee/add}"
+<form th:action="@{/profile/addressee/add}"
       th:object="${addressee}" method="POST">
+    <input th:type="hidden" name="userId" th:value="${userId}" />
     Name
-    <input type="text" th:field="*{addresseeName}" />
+    <input type="text" name="addresseeName" />
     <br/>
     Email:
-    <input type="email" th:field="*{addresseeEmail}" />
+    <input type="email" name="addresseeEmail" />
     <br/>
     <input type="submit" value="Add" />
-
 </form>
 </body>
 </html>
