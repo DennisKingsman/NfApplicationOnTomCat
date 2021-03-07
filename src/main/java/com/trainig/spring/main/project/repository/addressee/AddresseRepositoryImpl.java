@@ -47,7 +47,7 @@ public class AddresseRepositoryImpl implements AddresseeRepository {
             "where ut.user_id = ?;";
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public JdbcTemplate jdbcTemplate;
 
     @Override
     public long save(Addressee addressee) {

@@ -4,6 +4,7 @@ import com.trainig.spring.main.project.entity.Role;
 import com.trainig.spring.main.project.entity.User;
 import com.trainig.spring.main.project.mapper.RoleRowMapper;
 import com.trainig.spring.main.project.mapper.UserRowMapper;
+import com.trainig.spring.main.project.utils.ModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import static com.trainig.spring.main.project.utils.Constants.USER_ROLE;
+import static com.trainig.spring.main.project.utils.ModelUtil.setupUser;
 
 @Transactional
 @Repository
@@ -55,7 +57,7 @@ public class UserRepositoryImpl implements UserRepository {
     private static final Logger logger = LoggerFactory.getLogger(UserRepositoryImpl.class);
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public JdbcTemplate jdbcTemplate;
 
     @Override
     public User findByName(String userName) {
@@ -73,7 +75,7 @@ public class UserRepositoryImpl implements UserRepository {
                 userName);
         if (Objects.isNull(user)) {
             logger.info("Empty user");
-            return new User();
+            return setupUser();
         } else {
             return user;
         }
@@ -91,7 +93,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findById(long userId) {
         User user = jdbcTemplate.queryForObject(FIND_BY_ID, new UserRowMapper(), userId);
-        return user == null ? new User() : user;
+        return user == null ? setupUser() : user;
     }
 
     @Override
