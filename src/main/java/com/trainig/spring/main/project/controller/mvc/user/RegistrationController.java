@@ -37,7 +37,7 @@ public class RegistrationController {
                           BindingResult bindingResult,
                           Model model) {
         log.info("user from registration from: {}", user);
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute(ERROR, "incorrect login or password");
             return REGISTER;
         } else if (!user.getPassword().equals(user.getPasswordConfirm())) {

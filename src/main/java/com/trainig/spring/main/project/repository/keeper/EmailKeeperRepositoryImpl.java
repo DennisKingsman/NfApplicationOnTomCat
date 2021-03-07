@@ -13,7 +13,7 @@ public class EmailKeeperRepositoryImpl implements EmailKeeperRepository {
     private static final String ADMIN = "admin";
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public JdbcTemplate jdbcTemplate;
 
     @Override
     public EmailKeeper getSchedulerEmail() {

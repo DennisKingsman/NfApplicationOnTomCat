@@ -29,9 +29,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private RoleRepository roleRepository;
-
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByName(userName);
@@ -69,7 +66,7 @@ public class UserServiceImpl implements UserService {
         log.info("does this user already registered: {}", confirm);
         if (confirm) {
             return false;
-        } else if (user.getUserName().equals("admin")){
+        } else if (user.getUserName().equals("admin")) {
             user.setRoles(Collections.singleton(new Role(2L, ROLE_ADMIN)));
         } else {
             user.setRoles(Collections.singleton(new Role(1L, USER_ROLE)));
@@ -94,7 +91,7 @@ public class UserServiceImpl implements UserService {
         log.info("user To DB : {}", userToDB);
         if (Objects.isNull(userFromDB.getUserId())) {
             return false;
-        } else if (!userFromDB.getPassword().equals(userToDB.getPassword())){
+        } else if (!userFromDB.getPassword().equals(userToDB.getPassword())) {
             log.info("New Password settled");
             userToDB.setUserPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
