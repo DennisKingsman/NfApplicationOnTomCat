@@ -29,14 +29,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByName(userName);
         return checkUserWithException(user);
     }
 
-    //
     @Override
     public User getByName(String userName) {
         return userRepository.findByName(userName);
@@ -51,19 +49,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    //
     @Override
     public List<User> getAll() {
         return userRepository.getAll();
     }
 
-//    @Override
-//    public User findById(long userId) {
-//        User user = userRepository.findById(userId);
-//        return checkUserWithException(user);
-//    }
-
-    //
     @Override
     public boolean save(User user) {
         boolean confirm = userRepository.isExists(user.getUserName());
@@ -82,13 +72,11 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    //
     @Override
     public boolean delete(long userId) {
         return userRepository.delete(userId) == 1;
     }
 
-    //
     @Override
     public boolean update(User user) {
         User userFromDB = userRepository.findById(user.getUserId());
@@ -103,11 +91,5 @@ public class UserServiceImpl implements UserService {
         }
         return userRepository.update(userToDB) == 1;
     }
-
-//    @Override
-//    public boolean comparePassword(long userId, String userPassword) {
-//        User userFromDB = userRepository.findById(userId);
-//        return bCryptPasswordEncoder.matches(userPassword, userFromDB.getPassword());
-//    }
 
 }

@@ -2,10 +2,7 @@ package com.trainig.spring.main.project.repository.user;
 
 import com.trainig.spring.main.project.entity.Role;
 import com.trainig.spring.main.project.entity.User;
-import com.trainig.spring.main.project.mapper.ForUnitTestUserRowMapper;
-import com.trainig.spring.main.project.mapper.RoleRowMapper;
 import com.trainig.spring.main.project.mapper.UserRowMapper;
-import com.trainig.spring.main.project.utils.ModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +10,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import static com.trainig.spring.main.project.utils.Constants.USER_ROLE;
 import static com.trainig.spring.main.project.utils.ModelUtil.setupUser;
 
 @Transactional
@@ -35,8 +29,6 @@ public class UserRepositoryImpl implements UserRepository {
             "on ut.user_id = user_to_role.user_id\n" +
             "where ut.user_name = ?";
     public static final String FIND_BY_ID = SELECT_ALL + " where user_id = ?";
-    public static final String SAVE_USER = "insert into user_table(user_name, user_password)\n" +
-            "\tvalues (?, ?) returning user_id"; //userName userPassword
     public static final String SAVE_USER_WITH_ROLE = "with id_table as(\n" +
             "insert into user_table(user_name, user_password)\n" +
             "\tvalues (?, ?) returning user_id\n" + //userName userPassword
@@ -45,16 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
     public static final String DELETE_USER = "delete from user_table where user_id = ?";
     public static final String UPDATE_USER = "update user_table set user_name = ?," +
             " user_password = ? where user_id = ?";
-    public static final String USER_EXISTS_WITH_ID = "select count(user_id) from user_table where user_id = ?";
     public static final String USER_EXISTS_WITH_NAME = "select count(user_id) from user_table where user_name = ?";
-    public static final String GET_CONFIRM = "select count(user_name) from user_table" +
-            " where user_name = ? and user_password = ?";
-    public static final String GET_USER_ROLE = "select user_role.role_id, user_role.role_name from \n" +
-            "user_role inner join user_to_role\n" +
-            "on user_role.role_id = user_to_role.role_id \n" +
-            "inner join user_table\n" +
-            "on user_table.user_id = user_to_role.user_id\n" +
-            "where user_table.user_id = ?";
 
     private static final Logger logger = LoggerFactory.getLogger(UserRepositoryImpl.class);
 
@@ -82,15 +65,6 @@ public class UserRepositoryImpl implements UserRepository {
             return user;
         }
     }
-
-//    @Override
-//    public long save(User user) {
-//        return jdbcTemplate.queryForObject(
-//                SAVE_USER,
-//                Long.TYPE,
-//                user.getUsername(),
-//                user.getPassword());
-//    }
 
     @Override
     public User findById(long userId) {
@@ -128,41 +102,10 @@ public class UserRepositoryImpl implements UserRepository {
                 user.getUserId());
     }
 
-//    @Override
-//    public boolean isExists(long id) {
-//        int confirm = jdbcTemplate.queryForObject(USER_EXISTS_WITH_ID, Integer.TYPE, id);
-//        return confirm == 1;
-//    }
-
     @Override
     public boolean isExists(String name) {
         int confirm = jdbcTemplate.queryForObject(USER_EXISTS_WITH_NAME, Integer.TYPE, name);
         return confirm > 0;
     }
-
-//    @Override
-//    public boolean getConfirm(String userName, String cryptPassword) {
-//        int confirm = jdbcTemplate.queryForObject(
-//                GET_CONFIRM,
-//                Integer.TYPE,
-//                userName,
-//                cryptPassword);
-//        return confirm == 1;
-//    }
-
-//    @Override
-//    public Set<Role> getUserRole(long userId) {
-//        List<Role> roleFromDB = jdbcTemplate.query(GET_USER_ROLE, new RoleRowMapper(), userId);
-//        if (roleFromDB.isEmpty()) {
-//            logger.info("has not roles");
-//            return Collections.singleton(new Role());
-//        } else if (roleFromDB.size() != 1) {
-//            logger.warn("unexpected join result");
-//            return Collections.singleton(new Role(1L, USER_ROLE));
-//        } else {
-//            Role role = roleFromDB.get(0);
-//            return Collections.singleton(new Role(role.getRoleId(), role.getRoleName()));
-//        }
-//    }
 
 }

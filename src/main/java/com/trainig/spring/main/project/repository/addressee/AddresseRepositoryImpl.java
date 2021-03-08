@@ -47,14 +47,14 @@ public class AddresseRepositoryImpl implements AddresseeRepository {
             "where ut.user_id = ?;";
 
     @Autowired
-    public JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    @Override
-    public long save(Addressee addressee) {
-        return jdbcTemplate.queryForObject(SAVE_ADDRESSEE, Long.class,
-                addressee.getAddresseeEmail(),
-                addressee.getAddresseeName());
-    }
+//    @Override
+//    public long save(Addressee addressee) {
+//        return jdbcTemplate.queryForObject(SAVE_ADDRESSEE, Long.class,
+//                addressee.getAddresseeEmail(),
+//                addressee.getAddresseeName());
+//    }
 
     @Override
     public int update(Addressee addressee) {
@@ -90,33 +90,33 @@ public class AddresseRepositoryImpl implements AddresseeRepository {
         return count != 0;
     }
 
-    @Override
-    public boolean isUserAddresseeExists(Long userId) {
-        Integer count = jdbcTemplate.queryForObject(IS_USER_ADDRESSEE_EXISTS, Integer.TYPE, userId);
-        return count != 0;
-    }
+//    @Override
+//    public boolean isUserAddresseeExists(Long userId) {
+//        Integer count = jdbcTemplate.queryForObject(IS_USER_ADDRESSEE_EXISTS, Integer.TYPE, userId);
+//        return count != 0;
+//    }
 
-    @Override
-    public boolean isExists(long addresseeId) {
-        Integer count = jdbcTemplate.queryForObject(ADDRESSEE_EXISTS_WITH_ID, Integer.class, addresseeId);
-        return count != 0;
-    }
+//    @Override
+//    public boolean isExists(long addresseeId) {
+//        Integer count = jdbcTemplate.queryForObject(ADDRESSEE_EXISTS_WITH_ID, Integer.class, addresseeId);
+//        return count != 0;
+//    }
 
-    @Override
-    public Addressee findByName(String name) {
-        Addressee addressee = jdbcTemplate.queryForObject(FIND_BY_NAME, new AddresseeRowMapper(), name);
-        return addressee == null ? new Addressee() : addressee;
-    }
+//    @Override
+//    public Addressee findByName(String name) {
+//        Addressee addressee = jdbcTemplate.queryForObject(FIND_BY_NAME, new AddresseeRowMapper(), name);
+//        return addressee == null ? new Addressee() : addressee;
+//    }
 
-    @Override
-    public Addressee findById(long id) {
-        Addressee addressee = jdbcTemplate.queryForObject(FIND_BY_ID, new AddresseeRowMapper(), id);
-        return addressee == null ? new Addressee() : addressee;
-    }
-
-    @Override
-    public List<Addressee> getAll() {
-        return jdbcTemplate.query(SELECT_ALL, new AddresseeRowMapper());
-    }
+//    @Override
+//    public Addressee findById(long id) {
+//        Addressee addressee = jdbcTemplate.queryForObject(FIND_BY_ID, new AddresseeRowMapper(), id);
+//        return addressee == null ? new Addressee() : addressee;
+//    }
+//
+//    @Override
+//    public List<Addressee> getAll() {
+//        return jdbcTemplate.query(SELECT_ALL, new AddresseeRowMapper());
+//    }
 
 }

@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class AddresseeRestController {
 
     private static final Logger log = LoggerFactory.getLogger(AddresseeRestController.class);
-    private static final String ADDRESSEE = "addressee";
     private static final String ADDRESSEES = "addressees";
     private static final String USER_ID = "userId";
 
