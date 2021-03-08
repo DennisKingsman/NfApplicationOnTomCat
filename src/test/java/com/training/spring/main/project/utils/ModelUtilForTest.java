@@ -8,9 +8,9 @@ import java.util.Collections;
 public class ModelUtilForTest {
 
     private static final long ID = 1L;
-    private static final String USER_NAME = "name";
-    private static final String PASSWORD = "password";
-    private static final String USER_ROLE = "ROLE";
+    private static final String USER_NAME = "User0";
+    private static final String PASSWORD = "Password0";
+    private static final String USER_ROLE = "ROLE_USER";
 
     public static User setupUser() {
         User user = new User();

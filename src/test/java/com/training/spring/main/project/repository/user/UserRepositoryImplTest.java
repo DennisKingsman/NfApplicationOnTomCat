@@ -15,40 +15,39 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import javax.sql.DataSource;
 
 import static org.mockito.Mockito.*;
 import static com.trainig.spring.main.project.repository.user.UserRepositoryImpl.FIND_BY_NAME;
 import static com.training.spring.main.project.utils.ModelUtilForTest.setupUser;
 import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
 public class UserRepositoryImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(UserRepositoryImplTest.class);
 
-    @Mock
-    JdbcTemplate jdbcTemplate;
+    private DataSource dataSource;
 
     @Before
-    public void initMocks(){
-        MockitoAnnotations.initMocks(this);
+    public void initDataSource(){
+        dataSource = new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript("init.sql")
+                .addScript("insert.sql")
+                .build();
     }
 
     @Test
-    public void findByNameTest() {
-        User user = setupUser();
-        String userName = user.getUserName();
+    public void findByNameTestWithH2() {
         UserRepository userRepository = new UserRepositoryImpl();
-        log.info("Mock jdbcTemplate: {}", jdbcTemplate);
-//        ReflectionTestUtils.setField(userRepository, "jdbcTemplate", jdbcTemplate);
-        when(jdbcTemplate.queryForObject(
-                FIND_BY_NAME,
-                new ForUnitTestUserRowMapper(),
-                userName))
-                .thenReturn(user);
-        assertEquals(user, userRepository.findByName(userName));
+        ((UserRepositoryImpl) userRepository).setDataSource(dataSource);
+        User expected = setupUser();
+        assertEquals(expected, userRepository.findByName(expected.getUserName()));
     }
 
 }
