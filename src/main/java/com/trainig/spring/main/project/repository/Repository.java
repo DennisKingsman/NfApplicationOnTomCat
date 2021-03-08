@@ -18,7 +18,9 @@ public interface Repository<T> {
 
     int update(T entity);
 
-    boolean isExists(long id);
+    default boolean isExists(long id) {
+        return false;
+    }
 
     default boolean isExists(String name) {
         return false;

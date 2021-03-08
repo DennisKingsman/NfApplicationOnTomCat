@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface UserService extends UserDetailsService, Service<User> {
 
-    boolean comparePassword(long userId, String userPassword);
-
     @Override
     UserDetails loadUserByUsername(String s) throws UsernameNotFoundException;
 

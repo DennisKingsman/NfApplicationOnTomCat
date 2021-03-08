@@ -17,15 +17,15 @@ public class AddresseeServiceImpl implements AddresseeService {
     @Autowired
     private AddresseeRepository addresseRepository;
 
-    @Override
-    public List<Addressee> getAll() {
-        return addresseRepository.getAll();
-    }
+//    @Override
+//    public List<Addressee> getAll() {
+//        return addresseRepository.getAll();
+//    }
 
-    @Override
-    public Addressee findById(long addresseeId) {
-        return addresseRepository.findById(addresseeId);
-    }
+//    @Override
+//    public Addressee findById(long addresseeId) {
+//        return addresseRepository.findById(addresseeId);
+//    }
 
     @Override
     public boolean saveUserAddressee(long userId, Addressee addressee) {
@@ -44,31 +44,31 @@ public class AddresseeServiceImpl implements AddresseeService {
         return addresseRepository.getAllByUserId(userId);
     }
 
-    @Override
-    public synchronized boolean save(Addressee addressee) {
-        if (addresseRepository.isAddresseeExists(
-                addressee.getAddresseeName(),
-                addressee.getAddresseeEmail())) {
-            return false;
-        } else {
-            long addresseeId = addresseRepository.save(addressee);
-            addressee.setAddresseeId(addresseeId);
-            return true;
-        }
-    }
+//    @Override
+//    public synchronized boolean save(Addressee addressee) {
+//        if (addresseRepository.isAddresseeExists(
+//                addressee.getAddresseeName(),
+//                addressee.getAddresseeEmail())) {
+//            return false;
+//        } else {
+//            long addresseeId = addresseRepository.save(addressee);
+//            addressee.setAddresseeId(addresseeId);
+//            return true;
+//        }
+//    }
 
     @Override
     public boolean delete(long addresseeId) {
         return addresseRepository.delete(addresseeId) != 0;
     }
 
-    @Override
-    public boolean update(Addressee addressee) {
-        if (addresseRepository.isExists(addressee.getAddresseeId())) {
-            return false;
-        } else {
-            return addresseRepository.update(addressee) != 0;
-        }
-    }
+//    @Override
+//    public boolean update(Addressee addressee) {
+//        if (addresseRepository.isExists(addressee.getAddresseeId())) {
+//            return false;
+//        } else {
+//            return addresseRepository.update(addressee) != 0;
+//        }
+//    }
 
 }
