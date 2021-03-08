@@ -9,8 +9,6 @@ public interface AddresseeRepository extends Repository<Addressee> {
 
     boolean isAddresseeExists(String name, String email);
 
-    boolean isUserAddresseeExists(Long userId);
-
     boolean saveAddresseeWithUser(Long userId, Addressee addressee);
 
     List<Addressee> getAllByUserId(long userId);

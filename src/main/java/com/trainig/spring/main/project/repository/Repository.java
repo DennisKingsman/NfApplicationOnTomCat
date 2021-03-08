@@ -4,11 +4,17 @@ import java.util.List;
 
 public interface Repository<T> {
 
-    T findByName(String name);
+    default T findByName(String name) {
+        return null;
+    }
 
-    T findById(long id);
+    default T findById(long id) {
+        return null;
+    }
 
-    List<T> getAll();
+    default List<T> getAll() {
+        return null;
+    }
 
     default long save(T entity) {
         return 1L;

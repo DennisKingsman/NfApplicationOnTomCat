@@ -14,8 +14,10 @@ import java.util.List;
 public class ScheduleEmailMessage {
 
     private static final String MESSAGE = "Hello %s! This is the tea time!";
+
     @Autowired
     private JavaMailSender emailSender;
+
     @Autowired
     private AddresseeService addresseeService;
 
