@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class EmailKeeperRepositoryImpl implements EmailKeeperRepository {
 
-    private static final String GET_SCHEDULED_PROPERTIES = "select mail, scheduler_password\n" +
+    public static final String GET_SCHEDULED_PROPERTIES = "select mail, scheduler_password\n" +
             "from email_scheduler where scheduler_name = ?;";
-    private static final String ADMIN = "admin";
+    public static final String ADMIN = "admin";
 
     @Autowired
-    public JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public EmailKeeper getSchedulerEmail() {

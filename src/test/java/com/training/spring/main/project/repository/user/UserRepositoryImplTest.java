@@ -41,8 +41,9 @@ public class UserRepositoryImplTest {
         User user = setupUser();
         String userName = user.getUserName();
         UserRepository userRepository = new UserRepositoryImpl();
-        ReflectionTestUtils.setField(userRepository, "jdbcTemplate", jdbcTemplate);
-        Mockito.when(jdbcTemplate.queryForObject(
+        log.info("Mock jdbcTemplate: {}", jdbcTemplate);
+//        ReflectionTestUtils.setField(userRepository, "jdbcTemplate", jdbcTemplate);
+        when(jdbcTemplate.queryForObject(
                 FIND_BY_NAME,
                 new ForUnitTestUserRowMapper(),
                 userName))

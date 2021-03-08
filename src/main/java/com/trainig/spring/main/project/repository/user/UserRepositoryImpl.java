@@ -2,6 +2,7 @@ package com.trainig.spring.main.project.repository.user;
 
 import com.trainig.spring.main.project.entity.Role;
 import com.trainig.spring.main.project.entity.User;
+import com.trainig.spring.main.project.mapper.ForUnitTestUserRowMapper;
 import com.trainig.spring.main.project.mapper.RoleRowMapper;
 import com.trainig.spring.main.project.mapper.UserRowMapper;
 import com.trainig.spring.main.project.utils.ModelUtil;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -57,7 +59,7 @@ public class UserRepositoryImpl implements UserRepository {
     private static final Logger logger = LoggerFactory.getLogger(UserRepositoryImpl.class);
 
     @Autowired
-    public JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public User findByName(String userName) {
@@ -75,20 +77,20 @@ public class UserRepositoryImpl implements UserRepository {
                 userName);
         if (Objects.isNull(user)) {
             logger.info("Empty user");
-            return setupUser();
+            return new User();
         } else {
             return user;
         }
     }
 
-    @Override
-    public long save(User user) {
-        return jdbcTemplate.queryForObject(
-                SAVE_USER,
-                Long.TYPE,
-                user.getUsername(),
-                user.getPassword());
-    }
+//    @Override
+//    public long save(User user) {
+//        return jdbcTemplate.queryForObject(
+//                SAVE_USER,
+//                Long.TYPE,
+//                user.getUsername(),
+//                user.getPassword());
+//    }
 
     @Override
     public User findById(long userId) {
@@ -126,11 +128,11 @@ public class UserRepositoryImpl implements UserRepository {
                 user.getUserId());
     }
 
-    @Override
-    public boolean isExists(long id) {
-        int confirm = jdbcTemplate.queryForObject(USER_EXISTS_WITH_ID, Integer.TYPE, id);
-        return confirm == 1;
-    }
+//    @Override
+//    public boolean isExists(long id) {
+//        int confirm = jdbcTemplate.queryForObject(USER_EXISTS_WITH_ID, Integer.TYPE, id);
+//        return confirm == 1;
+//    }
 
     @Override
     public boolean isExists(String name) {
@@ -138,29 +140,29 @@ public class UserRepositoryImpl implements UserRepository {
         return confirm > 0;
     }
 
-    @Override
-    public boolean getConfirm(String userName, String cryptPassword) {
-        int confirm = jdbcTemplate.queryForObject(
-                GET_CONFIRM,
-                Integer.TYPE,
-                userName,
-                cryptPassword);
-        return confirm == 1;
-    }
+//    @Override
+//    public boolean getConfirm(String userName, String cryptPassword) {
+//        int confirm = jdbcTemplate.queryForObject(
+//                GET_CONFIRM,
+//                Integer.TYPE,
+//                userName,
+//                cryptPassword);
+//        return confirm == 1;
+//    }
 
-    @Override
-    public Set<Role> getUserRole(long userId) {
-        List<Role> roleFromDB = jdbcTemplate.query(GET_USER_ROLE, new RoleRowMapper(), userId);
-        if (roleFromDB.isEmpty()) {
-            logger.info("has not roles");
-            return Collections.singleton(new Role());
-        } else if (roleFromDB.size() != 1) {
-            logger.warn("unexpected join result");
-            return Collections.singleton(new Role(1L, USER_ROLE));
-        } else {
-            Role role = roleFromDB.get(0);
-            return Collections.singleton(new Role(role.getRoleId(), role.getRoleName()));
-        }
-    }
+//    @Override
+//    public Set<Role> getUserRole(long userId) {
+//        List<Role> roleFromDB = jdbcTemplate.query(GET_USER_ROLE, new RoleRowMapper(), userId);
+//        if (roleFromDB.isEmpty()) {
+//            logger.info("has not roles");
+//            return Collections.singleton(new Role());
+//        } else if (roleFromDB.size() != 1) {
+//            logger.warn("unexpected join result");
+//            return Collections.singleton(new Role(1L, USER_ROLE));
+//        } else {
+//            Role role = roleFromDB.get(0);
+//            return Collections.singleton(new Role(role.getRoleId(), role.getRoleName()));
+//        }
+//    }
 
 }
