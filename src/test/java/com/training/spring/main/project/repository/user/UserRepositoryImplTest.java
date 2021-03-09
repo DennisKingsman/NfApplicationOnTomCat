@@ -39,13 +39,13 @@ public class UserRepositoryImplTest {
 
     @Test
     public void findByNameSuccessfulTest() {
-        User expected = setupUser();
+        User expected = setupUser(1);
         assertEquals(expected, userRepository.findByName(expected.getUserName()));
     }
 
     @Test
     public void findByIdSuccessfulTest() {
-        User expected = setupUser();
+        User expected = setupUser(1);
         assertEquals(expected, userRepository.findById(expected.getUserId()));
     }
 
@@ -83,7 +83,7 @@ public class UserRepositoryImplTest {
 
     @Test
     public void updateUnsuccessfulTest() {
-        User user = setupUser();
+        User user = setupUser(1);
         user.setUserId(45L);
         assertEquals(0, userRepository.update(user));
     }

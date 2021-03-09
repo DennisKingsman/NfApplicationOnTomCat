@@ -15,8 +15,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.trainig.spring.main.project.utils.ModelUtil.setupUser;
-
 @Transactional
 @Repository
 public class UserRepositoryImpl implements UserRepository {

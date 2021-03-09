@@ -16,14 +16,13 @@ public class ModelUtil {
     private static final String USER_NAME = "User";
     private static final String PASSWORD = "Password";
     private static final String USER_ROLE = "ROLE_USER";
-    private static final String ROLE_ADMIN = "ROLE_ADMIN";
     private static final long USER_ROLE_ID = 2L;
 
-    public static User setupUser() {
+    public static User setupUser(long i) {
         User user = new User();
-        user.setUserId(2L);
-        user.setUserName(USER_NAME + 1);
-        user.setUserPassword(PASSWORD + 1);
+        user.setUserId(i + 1);
+        user.setUserName(USER_NAME + i);
+        user.setUserPassword(PASSWORD + i);
         user.setRoles(Collections.singleton(new Role(USER_ROLE_ID, USER_ROLE)));
         return user;
     }
@@ -42,23 +41,6 @@ public class ModelUtil {
         emailKeeper.setKeeperEmail("scheduledMail");
         emailKeeper.setKeeperPassword("scheduledPassword");
         return emailKeeper;
-    }
-
-    public static List<User> setupUsers() {
-        List<User> users = new ArrayList<>();
-        for (long i = 1; i < 4; i++) {
-            User user = new User();
-            user.setUserId(i);
-            user.setUserName(USER_NAME + (i - 1));
-            user.setUserPassword(PASSWORD + (i - 1));
-            if (i == 3) {
-                user.setRoles(Collections.singleton(new Role(3L, ROLE_ADMIN)));
-            } else {
-                user.setRoles(Collections.singleton(new Role(USER_ROLE_ID, USER_ROLE)));
-            }
-            users.add(user);
-        }
-        return users;
     }
 
 }
