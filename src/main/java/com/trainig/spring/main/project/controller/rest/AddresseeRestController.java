@@ -2,6 +2,7 @@ package com.trainig.spring.main.project.controller.rest;
 
 import com.trainig.spring.main.project.entity.Addressee;
 import com.trainig.spring.main.project.service.addressee.AddresseeService;
+import org.jboss.logging.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
