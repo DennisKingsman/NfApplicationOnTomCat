@@ -20,8 +20,12 @@ public class AddresseeRestController {
     private static final String ADDRESSEES = "addressees";
     private static final String USER_ID = "userId";
 
-    @Autowired
     private AddresseeService addresseeService;
+
+    @Autowired
+    public void setAddresseeService(AddresseeService addresseeService) {
+        this.addresseeService = addresseeService;
+    }
 
     @GetMapping(value = "/profile/addressees/{userId}")
     public ModelAndView getAllAddressee(
