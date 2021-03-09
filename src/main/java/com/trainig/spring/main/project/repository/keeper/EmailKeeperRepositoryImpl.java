@@ -5,15 +5,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
+
 @Repository
 public class EmailKeeperRepositoryImpl implements EmailKeeperRepository {
 
-    public static final String GET_SCHEDULED_PROPERTIES = "select mail, scheduler_password\n" +
+    private static final String GET_SCHEDULED_PROPERTIES = "select mail, scheduler_password\n" +
             "from email_scheduler where scheduler_name = ?;";
-    public static final String ADMIN = "admin";
+    private static final String ADMIN = "admin";
+
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public void setDataSource(DataSource dataSource) {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public EmailKeeper getSchedulerEmail() {
