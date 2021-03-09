@@ -19,7 +19,7 @@ public class UserServiceImplTest {
     UserRepository userRepository;
 
     @Before
-    public void initMocks(){
+    public void initMocks() {
         MockitoAnnotations.initMocks(this);
     }
 

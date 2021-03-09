@@ -13,14 +13,10 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
 
-import java.util.List;
-
 import static com.trainig.spring.main.project.utils.ModelUtil.setupUser;
-import static com.trainig.spring.main.project.utils.ModelUtil.setupUsers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
@@ -28,12 +24,11 @@ public class UserRepositoryImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(UserRepositoryImplTest.class);
 
-    private static DataSource dataSource;
     private static UserRepository userRepository;
 
     @BeforeClass
     public static void initDataSource() {
-        dataSource = new EmbeddedDatabaseBuilder()
+        DataSource dataSource = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("init.sql")
                 .addScript("insert.sql")

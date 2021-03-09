@@ -3,7 +3,6 @@ package com.training.spring.main.project.repository.addressee;
 import com.trainig.spring.main.project.entity.Addressee;
 import com.trainig.spring.main.project.repository.addressee.AddresseRepositoryImpl;
 import com.trainig.spring.main.project.repository.addressee.AddresseeRepository;
-import com.trainig.spring.main.project.repository.user.UserRepositoryImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,12 +20,11 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 public class AddresseeRepositoryImplTest {
 
-    private static DataSource dataSource;
     private static AddresseeRepository addresseeRepository;
 
     @BeforeClass
     public static void initDataSource() {
-        dataSource = new EmbeddedDatabaseBuilder()
+        DataSource dataSource = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("init.sql")
                 .addScript("insert.sql")
