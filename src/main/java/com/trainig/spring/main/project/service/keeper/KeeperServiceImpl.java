@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class KeeperServiceImpl implements KeeperService {
 
-    @Autowired
     private EmailKeeperRepository emailKeeperRepository;
+
+    @Autowired
+    public void setEmailKeeperRepository(EmailKeeperRepository emailKeeperRepository) {
+        this.emailKeeperRepository = emailKeeperRepository;
+    }
 
     @Override
     public EmailKeeper getMailKeeper(String name) {

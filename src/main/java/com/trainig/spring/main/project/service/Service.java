@@ -1,5 +1,7 @@
 package com.trainig.spring.main.project.service;
 
+import com.trainig.spring.main.project.repository.Repository;
+
 import java.util.List;
 
 public interface Service<T> {
@@ -20,6 +22,10 @@ public interface Service<T> {
 
     default boolean update(T entity) {
         return false;
+    }
+
+    default void setRepository(Repository<T> repository) {
+
     }
 
 }

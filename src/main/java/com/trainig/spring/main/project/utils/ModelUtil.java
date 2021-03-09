@@ -1,6 +1,7 @@
 package com.trainig.spring.main.project.utils;
 
 import com.trainig.spring.main.project.entity.Addressee;
+import com.trainig.spring.main.project.entity.EmailKeeper;
 import com.trainig.spring.main.project.entity.Role;
 import com.trainig.spring.main.project.entity.User;
 
@@ -33,6 +34,14 @@ public class ModelUtil {
         addressee.setAddresseeEmail("Email");
         addressee.setAddresseeId(1);
         return addressee;
+    }
+
+    public static EmailKeeper setupEmailKeeper() {
+        EmailKeeper emailKeeper = new EmailKeeper();
+        emailKeeper.setKeeperName("scheduledName");
+        emailKeeper.setKeeperEmail("scheduledMail");
+        emailKeeper.setKeeperPassword("scheduledPassword");
+        return emailKeeper;
     }
 
     public static List<User> setupUsers() {
