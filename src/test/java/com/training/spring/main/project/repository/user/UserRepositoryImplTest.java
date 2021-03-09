@@ -1,10 +1,8 @@
 package com.training.spring.main.project.repository.user;
 
-import com.trainig.spring.main.project.entity.Role;
 import com.trainig.spring.main.project.entity.User;
 import com.trainig.spring.main.project.repository.user.UserRepository;
 import com.trainig.spring.main.project.repository.user.UserRepositoryImpl;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -15,11 +13,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
 
-import java.util.Collections;
-import java.util.List;
-
-import static com.training.spring.main.project.utils.ModelUtilForTest.setupUser;
-import static com.training.spring.main.project.utils.ModelUtilForTest.setupUsers;
+import static com.trainig.spring.main.project.utils.ModelUtil.setupUser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
