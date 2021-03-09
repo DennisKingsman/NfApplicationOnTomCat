@@ -12,8 +12,8 @@ public class KeeperServiceImpl implements KeeperService {
     private EmailKeeperRepository emailKeeperRepository;
 
     @Override
-    public EmailKeeper getMailKeeper() {
-        return emailKeeperRepository.getSchedulerEmail();
+    public EmailKeeper getMailKeeper(String name) {
+        return emailKeeperRepository.getSchedulerEmail(name);
     }
 
 }

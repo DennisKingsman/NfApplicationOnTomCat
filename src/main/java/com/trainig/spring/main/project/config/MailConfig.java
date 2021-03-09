@@ -16,13 +16,14 @@ import java.util.Properties;
 public class MailConfig {
 
     private static final Logger log = LoggerFactory.getLogger(MailConfig.class);
+    private static final String ADMIN = "admin";
 
     @Autowired
     private KeeperService keeperService;
 
     @Bean
     public JavaMailSender getJavaMailSender() {
-        EmailKeeper emailKeeper = keeperService.getMailKeeper();
+        EmailKeeper emailKeeper = keeperService.getMailKeeper(ADMIN);
         log.info("email keeper mail is {}", emailKeeper.getKeeperEmail());
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

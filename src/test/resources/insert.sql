@@ -26,3 +26,6 @@ insert into user_to_addressee (user_id, addressee_id) values
 (1, 2),
 (2, 3);
 
+--email scheduler
+insert into email_scheduler(scheduler_name, mail, scheduler_password) values
+('scheduledName', 'scheduledMail', 'scheduledPassword');
