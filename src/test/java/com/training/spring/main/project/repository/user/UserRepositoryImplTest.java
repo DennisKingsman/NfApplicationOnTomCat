@@ -1,53 +1,89 @@
 package com.training.spring.main.project.repository.user;
 
+import com.trainig.spring.main.project.entity.Role;
 import com.trainig.spring.main.project.entity.User;
-import com.trainig.spring.main.project.mapper.ForUnitTestUserRowMapper;
 import com.trainig.spring.main.project.repository.user.UserRepository;
 import com.trainig.spring.main.project.repository.user.UserRepositoryImpl;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.sql.DataSource;
 
-import static org.mockito.Mockito.*;
-import static com.trainig.spring.main.project.repository.user.UserRepositoryImpl.FIND_BY_NAME;
+import java.util.Collections;
+import java.util.List;
+
 import static com.training.spring.main.project.utils.ModelUtilForTest.setupUser;
+import static com.training.spring.main.project.utils.ModelUtilForTest.setupUsers;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
 public class UserRepositoryImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(UserRepositoryImplTest.class);
 
-    private DataSource dataSource;
+    private static DataSource dataSource;
+    private static UserRepository userRepository;
 
-    @Before
-    public void initDataSource(){
+    @BeforeClass
+    public static void initDataSource() {
         dataSource = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("init.sql")
                 .addScript("insert.sql")
                 .build();
+        userRepository = new UserRepositoryImpl();
+        ((UserRepositoryImpl) userRepository).setDataSource(dataSource);
     }
 
     @Test
     public void findByNameTestWithH2() {
-        UserRepository userRepository = new UserRepositoryImpl();
-        ((UserRepositoryImpl) userRepository).setDataSource(dataSource);
         User expected = setupUser();
         assertEquals(expected, userRepository.findByName(expected.getUserName()));
+    }
+
+    @Test
+    public void findByIdTest() {
+        User expected = setupUser();
+        assertEquals(expected, userRepository.findById(expected.getUserId()));
+    }
+
+    @Test
+    public void getAllTest() {
+        assertEquals(3, userRepository.getAll().size());
+    }
+
+    /**
+     * h2 has problems with a CTE and insert returning
+     */
+    @Test
+    public void saveUserWithRoleTest() {
+        assertTrue(true);
+    }
+
+    @Test
+    public void isExistsTest() {
+        assertTrue(userRepository.isExists("User2"));
+    }
+
+    @Test
+    public void updateTest() {
+        User user = new User();
+        user.setUserId(1L);
+        user.setUserName("newName");
+        user.setUserPassword("password");
+        assertEquals(1, userRepository.update(user));
+    }
+
+    @Test
+    public void deleteTest() {
+        assertEquals(1, userRepository.delete(1));
     }
 
 }

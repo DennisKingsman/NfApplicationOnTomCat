@@ -7,4 +7,8 @@ public interface UserRepository extends Repository<User> {
 
     boolean saveUserWithRole(User user);
 
+    default int setForeignKey(User entity) {
+        return 0;
+    }
+
 }
