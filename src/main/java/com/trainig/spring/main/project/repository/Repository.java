@@ -1,8 +1,11 @@
 package com.trainig.spring.main.project.repository;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 public interface Repository<T> {
+
+    void setDataSource(DataSource dataSource);
 
     default T findByName(String name) {
         return null;

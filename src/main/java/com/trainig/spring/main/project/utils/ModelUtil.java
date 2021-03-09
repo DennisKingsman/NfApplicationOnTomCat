@@ -1,5 +1,6 @@
 package com.trainig.spring.main.project.utils;
 
+import com.trainig.spring.main.project.entity.Addressee;
 import com.trainig.spring.main.project.entity.Role;
 import com.trainig.spring.main.project.entity.User;
 
@@ -24,6 +25,14 @@ public class ModelUtil {
         user.setUserPassword(PASSWORD + 1);
         user.setRoles(Collections.singleton(new Role(USER_ROLE_ID, USER_ROLE)));
         return user;
+    }
+
+    public static Addressee setupAddressee() {
+        Addressee addressee = new Addressee();
+        addressee.setAddresseeName("Name");
+        addressee.setAddresseeEmail("Email");
+        addressee.setAddresseeId(1);
+        return addressee;
     }
 
     public static List<User> setupUsers() {

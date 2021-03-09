@@ -13,8 +13,14 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
 
+import java.util.List;
+
 import static com.trainig.spring.main.project.utils.ModelUtil.setupUser;
+import static com.trainig.spring.main.project.utils.ModelUtil.setupUsers;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
@@ -33,24 +39,24 @@ public class UserRepositoryImplTest {
                 .addScript("insert.sql")
                 .build();
         userRepository = new UserRepositoryImpl();
-        ((UserRepositoryImpl) userRepository).setDataSource(dataSource);
+        userRepository.setDataSource(dataSource);
     }
 
     @Test
-    public void findByNameTestWithH2() {
+    public void findByNameSuccessfulTest() {
         User expected = setupUser();
         assertEquals(expected, userRepository.findByName(expected.getUserName()));
     }
 
     @Test
-    public void findByIdTest() {
+    public void findByIdSuccessfulTest() {
         User expected = setupUser();
         assertEquals(expected, userRepository.findById(expected.getUserId()));
     }
 
     @Test
     public void getAllTest() {
-        assertEquals(3, userRepository.getAll().size());
+        assertNotNull(userRepository.getAll());
     }
 
     /**
@@ -62,12 +68,17 @@ public class UserRepositoryImplTest {
     }
 
     @Test
-    public void isExistsTest() {
+    public void isExistsSuccessfulTest() {
         assertTrue(userRepository.isExists("User2"));
     }
 
     @Test
-    public void updateTest() {
+    public void isExistsUnsuccessfulTest() {
+        assertFalse(userRepository.isExists("failUser"));
+    }
+
+    @Test
+    public void updateSuccessfulTest() {
         User user = new User();
         user.setUserId(1L);
         user.setUserName("newName");
@@ -76,8 +87,20 @@ public class UserRepositoryImplTest {
     }
 
     @Test
-    public void deleteTest() {
+    public void updateUnsuccessfulTest() {
+        User user = setupUser();
+        user.setUserId(45L);
+        assertEquals(0, userRepository.update(user));
+    }
+
+    @Test
+    public void deleteSuccessfulTest() {
         assertEquals(1, userRepository.delete(1));
+    }
+
+    @Test
+    public void deleteUnsuccessfulTest() {
+        assertEquals(0, userRepository.delete(45));
     }
 
 }

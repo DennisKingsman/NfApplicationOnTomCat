@@ -77,7 +77,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findById(long userId) {
         User user = jdbcTemplate.queryForObject(FIND_BY_ID, new UserRowMapper(), userId);
-        return user == null ? setupUser() : user;
+        return user == null ? new User() : user;
     }
 
     @Override

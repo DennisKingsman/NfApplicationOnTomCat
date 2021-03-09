@@ -21,7 +21,6 @@ public class EmailKeeperRepositoryImpl implements EmailKeeperRepository {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-
     @Override
     public EmailKeeper getSchedulerEmail() {
         return jdbcTemplate.queryForObject(GET_SCHEDULED_PROPERTIES,

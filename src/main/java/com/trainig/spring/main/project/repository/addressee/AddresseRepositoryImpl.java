@@ -40,7 +40,6 @@ public class AddresseRepositoryImpl implements AddresseeRepository {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-
     @Override
     public int update(Addressee addressee) {
         return jdbcTemplate.update(UPDATE_ADDRESSEE_BY_ID,
@@ -49,6 +48,12 @@ public class AddresseRepositoryImpl implements AddresseeRepository {
                 addressee.getAddresseeId());
     }
 
+    /**
+     * non tested method with CTE and insert returning
+     * @param userId userId
+     * @param addressee addressee entity
+     * @return saved?
+     */
     @Override
     public boolean saveAddresseeWithUser(Long userId, Addressee addressee) {
         int updatedRow = jdbcTemplate.update(
