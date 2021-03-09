@@ -21,6 +21,12 @@ public class AddresseeServiceImpl implements AddresseeService {
         this.addresseeRepository = addresseeRepository;
     }
 
+    /**
+     * non tested method! ALERT!
+     * @param userId userId
+     * @param addressee Addressee entity
+     * @return is Saved?
+     */
     @Override
     public boolean saveUserAddressee(long userId, Addressee addressee) {
         if (addresseeRepository.isAddresseeExists(
