@@ -5,9 +5,11 @@ import com.trainig.spring.main.project.repository.addressee.AddresseRepositoryIm
 import com.trainig.spring.main.project.repository.addressee.AddresseeRepository;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
 
@@ -17,7 +19,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@SpringBootTest
+@RunWith(SpringRunner.class)
 public class AddresseeRepositoryImplTest {
 
     private static AddresseeRepository addresseeRepository;

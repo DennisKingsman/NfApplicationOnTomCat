@@ -7,23 +7,20 @@ import com.trainig.spring.main.project.service.addressee.AddresseeService;
 import com.trainig.spring.main.project.service.addressee.AddresseeServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.sql.DataSource;
-
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@WebMvcTest
+@RunWith(SpringRunner.class)
 public class AddresseeRestControllerTest {
 
     private static final String USER_ID = "userId";
@@ -63,6 +60,15 @@ public class AddresseeRestControllerTest {
         assertEquals(ADDRESSEES, modelAndView.getViewName());
         Map<String, Object> map = modelAndView.getModel();
         assertNotNull(map.get(ADDRESSEES));
+        assertNotNull(map.get(USER_ID));
+    }
+
+    @Test
+    public void getAddAddresseePageTest() {
+        ModelAndView modelAndView = addresseeRestController
+                .getAddAddresseePage(1L, new ModelAndView());
+        assertEquals("newAddressee", modelAndView.getViewName());
+        Map<String, Object> map = modelAndView.getModel();
         assertNotNull(map.get(USER_ID));
     }
 

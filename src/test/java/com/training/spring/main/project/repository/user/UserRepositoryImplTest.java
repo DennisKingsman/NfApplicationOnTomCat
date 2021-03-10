@@ -5,11 +5,13 @@ import com.trainig.spring.main.project.repository.user.UserRepository;
 import com.trainig.spring.main.project.repository.user.UserRepositoryImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
 
@@ -19,7 +21,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@SpringBootTest
+@RunWith(SpringRunner.class)
 public class UserRepositoryImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(UserRepositoryImplTest.class);
