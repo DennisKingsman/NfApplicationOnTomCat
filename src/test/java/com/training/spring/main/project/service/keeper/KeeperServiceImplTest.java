@@ -1,8 +1,10 @@
-package com.training.spring.main.project.repository.keeper;
+package com.training.spring.main.project.service.keeper;
 
 import com.trainig.spring.main.project.entity.EmailKeeper;
 import com.trainig.spring.main.project.repository.keeper.EmailKeeperRepository;
 import com.trainig.spring.main.project.repository.keeper.EmailKeeperRepositoryImpl;
+import com.trainig.spring.main.project.service.keeper.KeeperService;
+import com.trainig.spring.main.project.service.keeper.KeeperServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,9 +19,9 @@ import static com.trainig.spring.main.project.utils.ModelUtil.setupEmailKeeper;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
-public class EmailKeeperRepositoryImplTest {
+public class KeeperServiceImplTest {
 
-    private static EmailKeeperRepository emailKeeperRepository;
+    private static KeeperService keeperService;
 
     @BeforeClass
     public static void initDataSource() {
@@ -28,15 +30,17 @@ public class EmailKeeperRepositoryImplTest {
                 .addScript("init.sql")
                 .addScript("insert.sql")
                 .build();
-        emailKeeperRepository = new EmailKeeperRepositoryImpl();
+        EmailKeeperRepository emailKeeperRepository = new EmailKeeperRepositoryImpl();
         ((EmailKeeperRepositoryImpl) emailKeeperRepository).setDataSource(dataSource);
+        keeperService = new KeeperServiceImpl();
+        keeperService.setEmailKeeperRepository(emailKeeperRepository);
     }
 
     @Test
-    public void getSchedulerEmailTest() {
+    public void getMailKeeperTest() {
         EmailKeeper expected = setupEmailKeeper();
         String name = expected.getKeeperName();
-        assertEquals(expected, emailKeeperRepository.getSchedulerEmail(name));
+        assertEquals(expected, keeperService.getMailKeeper(name));
     }
 
 }

@@ -20,8 +20,12 @@ public class InfoPageController {
 
     private static final Logger log = LoggerFactory.getLogger(InfoPageController.class);
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/profile")
     public String getInfoPage(Model model, Principal principal) {

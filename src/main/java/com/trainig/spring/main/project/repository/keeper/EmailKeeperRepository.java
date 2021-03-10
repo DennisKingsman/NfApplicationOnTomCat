@@ -4,6 +4,6 @@ import com.trainig.spring.main.project.entity.EmailKeeper;
 
 public interface EmailKeeperRepository {
 
-    EmailKeeper getSchedulerEmail();
+    EmailKeeper getSchedulerEmail(String name);
 
 }
