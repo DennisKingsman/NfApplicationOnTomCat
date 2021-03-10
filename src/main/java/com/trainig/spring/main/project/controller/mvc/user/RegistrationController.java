@@ -22,8 +22,12 @@ public class RegistrationController {
     private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
     private static final String REGISTER = "register";
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/registration")
     public String register(Model model) {
@@ -37,7 +41,7 @@ public class RegistrationController {
                           BindingResult bindingResult,
                           Model model) {
         log.info("user from registration from: {}", user);
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute(ERROR, "incorrect login or password");
             return REGISTER;
         } else if (!user.getPassword().equals(user.getPasswordConfirm())) {

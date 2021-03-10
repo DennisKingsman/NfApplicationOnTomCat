@@ -1,14 +1,14 @@
- package com.trainig.spring.main.project.config;
+package com.trainig.spring.main.project.config;
 
- import com.trainig.spring.main.project.service.user.UserService;
- import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.context.annotation.Bean;
- import org.springframework.context.annotation.Configuration;
- import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
- import org.springframework.security.config.annotation.web.builders.HttpSecurity;
- import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
- import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
- import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.trainig.spring.main.project.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -31,27 +31,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf()
                 .disable()
-                    .authorizeRequests()
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/profile/**").hasRole("USER")
+                .authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/profile/**").hasRole("USER")
                 .and().
-                    authorizeRequests().
-                    antMatchers("/", "/home", "/registration").permitAll()
+                authorizeRequests().
+                antMatchers("/", "/home", "/registration").permitAll()
 //                    .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .usernameParameter("userName")
-                    .passwordParameter("userPassword")
-                    .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/profile") //
-                    .failureUrl("/login?error=true")//
-                    .permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .usernameParameter("userName")
+                .passwordParameter("userPassword")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/profile") //
+                .failureUrl("/login?error=true")//
+                .permitAll()
                 .and()
-                    .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/")
-                    .permitAll();
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll();
         httpSecurity.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
     }
 

@@ -26,11 +26,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private RoleRepository roleRepository;
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -58,18 +59,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(long userId) {
-        User user = userRepository.findById(userId);
-        return checkUserWithException(user);
-    }
-
-    @Override
     public boolean save(User user) {
         boolean confirm = userRepository.isExists(user.getUserName());
         log.info("does this user already registered: {}", confirm);
         if (confirm) {
             return false;
-        } else if (user.getUserName().equals("admin")){
+        } else if (user.getUserName().equals("admin")) {
             user.setRoles(Collections.singleton(new Role(2L, ROLE_ADMIN)));
         } else {
             user.setRoles(Collections.singleton(new Role(1L, USER_ROLE)));
@@ -94,17 +89,11 @@ public class UserServiceImpl implements UserService {
         log.info("user To DB : {}", userToDB);
         if (Objects.isNull(userFromDB.getUserId())) {
             return false;
-        } else if (!userFromDB.getPassword().equals(userToDB.getPassword())){
+        } else if (!userFromDB.getPassword().equals(userToDB.getPassword())) {
             log.info("New Password settled");
             userToDB.setUserPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
         return userRepository.update(userToDB) == 1;
-    }
-
-    @Override
-    public boolean comparePassword(long userId, String userPassword) {
-        User userFromDB = userRepository.findById(userId);
-        return bCryptPasswordEncoder.matches(userPassword, userFromDB.getPassword());
     }
 
 }

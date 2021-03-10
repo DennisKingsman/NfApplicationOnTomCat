@@ -2,7 +2,6 @@ package com.trainig.spring.main.project.config;
 
 import com.trainig.spring.main.project.entity.EmailKeeper;
 import com.trainig.spring.main.project.service.keeper.KeeperService;
-import com.trainig.spring.main.project.utils.EmailConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +16,14 @@ import java.util.Properties;
 public class MailConfig {
 
     private static final Logger log = LoggerFactory.getLogger(MailConfig.class);
+    private static final String ADMIN = "admin";
 
     @Autowired
     private KeeperService keeperService;
 
     @Bean
     public JavaMailSender getJavaMailSender() {
-        EmailKeeper emailKeeper = keeperService.getMailKeeper();
+        EmailKeeper emailKeeper = keeperService.getMailKeeper(ADMIN);
         log.info("email keeper mail is {}", emailKeeper.getKeeperEmail());
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

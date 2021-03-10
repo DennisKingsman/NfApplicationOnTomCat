@@ -1,17 +1,31 @@
 package com.trainig.spring.main.project.service;
 
+import com.trainig.spring.main.project.repository.Repository;
+
 import java.util.List;
 
 public interface Service<T> {
 
-    List<T> getAll();
+    default List<T> getAll() {
+        return null;
+    }
 
-    T findById(long id);
+    default T findById(long id) {
+        return null;
+    }
 
-    boolean save(T entity);
+    default boolean save(T entity) {
+        return false;
+    }
 
     boolean delete(long id);
 
-    boolean update(T entity);
+    default boolean update(T entity) {
+        return false;
+    }
+
+    default void setRepository(Repository<T> repository) {
+
+    }
 
 }

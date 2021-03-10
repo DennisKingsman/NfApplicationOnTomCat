@@ -53,28 +53,28 @@ public class User implements UserDetails {
         this.userId = userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
     public String getPasswordConfirm() {
         return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     public String getUserName() {
         return userName;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getUserPassword() {
         return userPassword;
     }
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public Set<Role> getRoles() {
@@ -145,7 +145,6 @@ public class User implements UserDetails {
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
-                ", passwordConfirm='" + passwordConfirm + '\'' +
                 ", roles=" + roles +
                 '}';
     }

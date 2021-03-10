@@ -1,14 +1,23 @@
 package com.trainig.spring.main.project.repository;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 public interface Repository<T> {
 
-    T findByName(String name);
+    void setDataSource(DataSource dataSource);
 
-    T findById(long id);
+    default T findByName(String name) {
+        return null;
+    }
 
-    List<T> getAll();
+    default T findById(long id) {
+        return null;
+    }
+
+    default List<T> getAll() {
+        return null;
+    }
 
     default long save(T entity) {
         return 1L;
@@ -18,7 +27,9 @@ public interface Repository<T> {
 
     int update(T entity);
 
-    boolean isExists(long id);
+    default boolean isExists(long id) {
+        return false;
+    }
 
     default boolean isExists(String name) {
         return false;

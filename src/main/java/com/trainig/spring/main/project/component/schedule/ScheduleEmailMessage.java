@@ -13,13 +13,13 @@ import java.util.List;
 @Component
 public class ScheduleEmailMessage {
 
+    private static final String MESSAGE = "Hello %s! This is the tea time!";
+
     @Autowired
     private JavaMailSender emailSender;
 
     @Autowired
     private AddresseeService addresseeService;
-
-    private static final String MESSAGE = "Hello %s! This is the tea time!";
 
     @Scheduled(cron = "0 0 17 * * MON-FRI", zone = "Asia/Dubai")
     private void tryToSendEmail() {
